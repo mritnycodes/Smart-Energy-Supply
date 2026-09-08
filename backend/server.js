@@ -140,4 +140,30 @@ app.get('/api/simulation/status', (req, res) => {
     logs: logs || []
   });
 });
+// 1. Status Telemetry Endpoint (This was missing!)
+app.get('/api/simulation/status', (req, res) => {
+  res.json({
+    mainGridStatus: "ONLINE",
+    batteryReserve: 450,
+    totalBatteryKWh: 500,
+    activeDemand: 350,
+    batteryCapacity: 90,
+    estimatedRuntime: "~1.3 Hours Remaining",
+    logs: logs || []
+  });
+});
+
+// 2. Existing Booking Route
+app.post('/api/rooms/book', (req, res) => {
+  const { id, eventTitle, hasChiefGuest, isEmergency } = req.body;
+  rooms = rooms.map(r => r.id === id ? { ...r, isOccupied: true, eventTitle, hasChiefGuest, isEmergency: id === 'srm_hospital' ? isEmergency : false } : r);
+  
+  const target = rooms.find(r => r.id === id);
+  logs.unshift(`${new Date().toLocaleTimeString()} - ${target.name} reserved: "${eventTitle}"`);
+  res.json({ success: true, rooms, logs });
+});
+
+// 3. Fix port for Render deployment
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on port ${PORT}`));
 app.listen(5001, () => console.log('SRM Ramapuram Backend running on http://localhost:5001'));
