@@ -71,7 +71,7 @@ export default function App() {
 };
   const runKnapsackOptimization = async () => {
     try {
-      const res = await fetch('https://smart-energy-supply.onrender.com/api/simulation/optimize',{ method: 'POST',});
+      const res = await fetch('https://smart-energy-supply.onrender.com/api/knapsack/run',{ method: 'POST',});
       if (res.ok) {
         const json = await res.json();
         setKnapsackData(json);
@@ -96,7 +96,7 @@ export default function App() {
     };
 
     try {
-      await fetch('http://localhost:5000/api/rooms/book', {
+      await fetch('https://smart-energy-supply.onrender.com/api/simulation/optimize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
