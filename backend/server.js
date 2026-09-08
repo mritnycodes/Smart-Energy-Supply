@@ -166,4 +166,3 @@ app.post('/api/rooms/book', (req, res) => {
 // 3. Fix port for Render deployment
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on port ${PORT}`));
-app.listen(5001, () => console.log('SRM Ramapuram Backend running on http://localhost:5001'));
