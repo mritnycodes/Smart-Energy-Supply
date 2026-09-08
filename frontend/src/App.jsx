@@ -59,7 +59,7 @@ export default function App() {
 
   try {
     // 2. Send toggle request to backend
-    const res = await fetch('http://127.0.0.1:5001/api/grid/toggle', { method: 'POST' });
+    const res = await fetch('https://smart-energy-supply.onrender.com/api/grid/toggle',{ method: 'POST',});
     if (res.ok) {
       const json = await res.json();
       // 3. Sync UI with backend confirmation
@@ -71,7 +71,7 @@ export default function App() {
 };
   const runKnapsackOptimization = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/knapsack/run', { method: 'POST' });
+      const res = await fetch('https://smart-energy-supply.onrender.com/api/simulation/optimize',{ method: 'POST',});
       if (res.ok) {
         const json = await res.json();
         setKnapsackData(json);
