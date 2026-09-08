@@ -70,18 +70,21 @@ export default function App() {
   }
 };
   const runKnapsackOptimization = async () => {
-    try {
-      const res = await fetch('https://smart-energy-supply.onrender.com/api/knapsack/run',{ method: 'POST',});
-      if (res.ok) {
-        const json = await res.json();
-        setKnapsackData(json);
-        setShowKnapsackModal(true);
-        fetchStatus();
-      }
-    } catch (err) {
-      alert("Backend server offline. Ensure backend node server is running.");
+  try {
+    const res = await fetch('https://smart-energy-supply.onrender.com/api/knapsack/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (res.ok) {
+      const json = await res.json();
+      setKnapsackData(json);
+      setShowKnapsackModal(true);
+      fetchStatus();
     }
-  };
+  } catch (err) {
+    console.error("Failed to run knapsack optimization:", err);
+  }
+};
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
