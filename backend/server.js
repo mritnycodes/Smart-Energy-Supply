@@ -128,5 +128,16 @@ app.post('/api/rooms/book', (req, res) => {
   logs.unshift(`${new Date().toLocaleTimeString()} - ${target.name} reserved: "${eventTitle}"`);
   res.json({ success: true, rooms, logs });
 });
-
+// Status Telemetry Endpoint
+app.get('/api/simulation/status', (req, res) => {
+  res.json({
+    mainGridStatus: "ONLINE",
+    batteryReserve: 450, // or your dynamic variable
+    totalBatteryKWh: 500,
+    activeDemand: 350,
+    batteryCapacity: 90,
+    estimatedRuntime: "~1.3 Hours Remaining",
+    logs: logs || []
+  });
+});
 app.listen(5001, () => console.log('SRM Ramapuram Backend running on http://localhost:5001'));
