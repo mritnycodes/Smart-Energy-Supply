@@ -38,7 +38,7 @@ export default function App() {
 
   const fetchStatus = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/simulation/status');
+      const res = await fetch('https://smart-energy-supply.onrender.com/api/simulation/status',{ method: 'POST',});
       if (res.ok) {
         const json = await res.json();
         setData(prev => ({ ...prev, ...json }));
