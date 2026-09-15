@@ -76,7 +76,7 @@ app.post('/api/grid/toggle', (req, res) => {
 app.post('/api/knapsack/run', (req, res) => {
   const maxCapacityKW = (mainGridStatus === "OFFLINE") 
     ? ((batteryCapacity / 100) * totalBatteryKWh) 
-    : 1000;
+    : 450;
 
   // 1. Calculate Priority Scores
   const rankedRooms = [...rooms].map(room => {
